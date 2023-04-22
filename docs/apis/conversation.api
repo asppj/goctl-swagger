@@ -1,0 +1,37 @@
+syntax = "v1"
+
+info(
+    title: "Conversation"
+    desc: "与AI聊天"
+    author: "LiYanLin"
+    email: "yanlin.li@rdc-west.com"
+    version: "v0.1.0"
+)
+
+@server(
+    group: conversation
+    prefix: /api/chip
+)
+
+service main-api {
+    @doc(
+        summary: "对话"
+    )
+    @handler ConversationHandler
+    post /conversation (ConversationReq) returns (ConversationResp)
+}
+
+type ConversationReq struct {
+    Conversation []ConversationMessage `json:"conversation"`
+}
+
+type ConversationMessage struct {
+    Role string `json:"role"`
+    Content string `json:"content"`
+}
+
+type ConversationResp struct {
+    Content string `json:"content"`
+    ChatId string `json:"chat_id"`
+    IsFinished bool `json:"is_finished"`
+}

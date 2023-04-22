@@ -1,0 +1,160 @@
+syntax = "v1"
+
+info(
+    title: "api接口"
+    desc: "Community 相关api"
+    author: "luorui"
+    email: "rui.luo@rdc-west.com"
+    version: "0.1.0"
+)
+
+import "apis/user.api"
+
+type CommunityTopicDetailReqsponse struct{
+    Uuid string `json:"uuid"`
+    Name string `json:"name"`
+}
+
+type CommunityTopicUuidRequest struct{
+    Uuid string `form:"uuid"`
+}
+
+type EditCommunityTopicRequest struct{
+    Uuid string `json:"uuid"`
+    Name string `json:"name"`
+}
+
+type CreateCommunityTopicRequest struct{
+    Name string `json:"name"`
+    Type string `json:"type,options=topics|roles"`
+}
+
+type CommunityTopicBriefInfo struct{
+    Uuid string `json:"uuid"`
+    Name string `json:"name"`
+}
+
+@server(
+    group: community
+    middleware: AuthUser
+    prefix: /api/chip/community
+)
+service main-api {
+    @doc "获取所有topic列表"
+    @handler GetTopicList
+    get /topic returns ([]CommunityTopicBriefInfo)
+
+    @doc "获取topic详情"
+    @handler GetTopicDetail
+    get /topic/detail (CommunityTopicUuidRequest) returns (CommunityTopicDetailReqsponse)
+}
+
+
+@server(
+    group: community
+    middleware: AuthAdminUser
+    prefix: /api/chip/community
+)
+service main-api {
+    @doc "创建topic"
+    @handler CreateTopic
+    post /topic (CreateCommunityTopicRequest) 
+
+    @doc "删除topic"
+    @handler DeleteTopic
+    delete /topic (CommunityTopicUuidRequest) 
+
+    @doc "编辑topic"
+    @handler EditTopic
+    put /topic (EditCommunityTopicRequest)  
+}
+
+
+type DiscussionsListRequests struct{
+    Page      int `form:"page"`
+    PageSize  int `form:"page_size"`
+    TopicId   string `form:"by_topic_id,optional"`
+    SortBy    string `form:"sort_by,options=create_at|upvote_num"`
+    Time      string `form:"time,options=all|day|week|month|year"`
+}
+
+
+type DiscussionInfoResponse struct{
+    Uuid string `json:"uuid"`
+    Title string `json:"title"`
+    UpvoteNum int64   `json:"upvote_num"`
+    RepliyNum int64  `json:"repliy_num"`
+    Content   string `json:"content"`
+    CreateAt int64 `json:"create_at"`
+    UpdateAt int64  `json:"update_at"`
+    CreateUser UserBriefInfo `json:"create_user"`
+    Topic      CommunityTopicBriefInfo  `json:"topic"`
+}
+
+
+type DiscussionReplyListRequest struct {
+    DicussionUuid string `form:"discussion_uuid"`
+    OrderBy        string `form:"order_by,options=create_at|upvote_num"`
+    Page          int  `form:"page"`
+    PageSize      int  `form:"page_size"`
+    ChildReplyNum int  `form:"child_reply_num,optional"`
+    ReplyUuid     string `form:"reply_uuid,optional"`
+}
+
+
+type CreateDiscussionRequest struct{
+    Title       string  `json:"title"`
+    Content     string  `json:"content"`
+    TopicUuid   string  `json:"topic_uuid"`
+}
+
+type Reply struct {
+    Uuid           string        `json:"uuid"`
+    DiscussionUuid string        `json:"discussion_uuid"`
+    ToUser         UserBriefInfo `json:"to_user"`
+    User           UserBriefInfo `json:"user"`
+    Content         string        `json:"content"`
+    ToReplayUuid   string        `json:"to_replay_uuid"`
+    UpvoteNum      int64           `json:"upvoteNum"`
+    ReplyNum      int64           `json:"reply_num"`
+    CreateAt     int64           `json:"create_at"`
+}
+
+
+type DiscussionReplyResponse struct{
+    Reply
+    ChildReplyList  []Reply `json:"child_reply_list"`
+}
+
+type DiscussionReplyRequest struct{
+    DicussionUuid string `json:"discussion_uuid"`
+    Content      string  `json:"content"`
+    ToReplyUuid string  `json:"to_replay_uuid,optional"`
+}
+
+
+
+@server(
+    group: community
+    middleware: AuthUser
+    prefix: /api/chip/community
+)
+service main-api {
+    @doc "获取论坛帖子列表"
+    @handler GetDiscussionList
+    get /discussion (DiscussionsListRequests) returns ([]DiscussionInfoResponse)
+
+    @doc "创建论坛帖子"
+    @handler CreateDiscussion
+    post /discussion (CreateDiscussionRequest) 
+
+    @doc "获取帖子全部回复"
+    @handler GetDiscussionReplyList
+    get /discussion/reply (DiscussionReplyListRequest) returns ([]DiscussionReplyResponse)
+    
+    @doc "创建帖子回复"
+    @handler CreateDiscussionReplyList
+    post /discussion/reply (DiscussionReplyRequest) 
+}
+
+

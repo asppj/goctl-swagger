@@ -1,0 +1,47 @@
+syntax = "v1"
+
+info(
+    title: "type title here"
+    desc: "type desc here"
+    author: "type author here"
+    email: "type email here"
+    version: "type version here"
+)
+
+
+type UserInfo struct {
+    Uuid string `json:"uuid"`
+    Name string `json:"name"`
+    Avatar_url string `json:"avatar_url,options=you|me"`
+}
+
+type UserBriefInfo struct {
+    Uuid string `json:"uuid"`
+    Name string `json:"name"`
+    Avatar_url string `json:"avatar_url,options=you|me"`
+}
+
+
+type PutUserInfoReq struct {
+    Name string `json:"name,optional"`
+    Image string `json:"img,options=you|me"`
+}
+
+
+@server(
+    group: user
+    middleware: AuthUser
+    prefix: /api/chip
+)
+
+service main-api {
+    @doc(
+        summary: "插口用户继续信息"
+    )
+    @handler GetUserInfo
+    get /user returns (UserInfo)
+
+    @doc "更新用户基础信息"
+    @handler PutUserInfo
+    put /user (PutUserInfoReq) returns (UserInfo)
+}

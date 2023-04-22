@@ -1,0 +1,18 @@
+syntax = "v1"
+
+info(
+	title: "type title here"
+	desc: "type desc here"
+	author: "type author here"
+	email: "type email here"
+	version: "v0.1.0"
+)
+
+import "base.api"
+import "apis/conversation.api"
+import "apis/health.api"
+import "apis/login.api"
+import "apis/user.api"
+import "apis/community.api"
+import "apis/upvote.api"
+import "apis/upload.api"

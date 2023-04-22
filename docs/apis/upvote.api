@@ -1,0 +1,32 @@
+syntax = "v1"
+
+info(
+    title: "api接口"
+    desc: "点赞 相关api"
+    author: "luorui"
+    email: "rui.luo@rdc-west.com"
+    version: "0.1.0"
+)
+
+type upvoteRequest struct {
+    Uuid  string `json:"uuid"`
+    TargetUuid string `json:"target_uuid"`
+    TargetType string  `json:"target_type"`
+}
+
+@server(
+    group: upvote
+    middleware: AuthUser
+    prefix: /api/chip
+)
+service main-api {
+    @doc "点赞对象"
+    @handler AddUpvote
+    post /upvote (upvoteRequest) 
+
+    @doc "取消点赞"
+    @handler CancelUpvote
+    delete /upvote (upvoteRequest)
+}
+
+

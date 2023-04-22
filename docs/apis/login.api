@@ -1,0 +1,45 @@
+syntax = "v1"
+
+info(
+    title: "Login"
+    desc: "注册、登录、oauth2"
+    author: "LiuShiPei"
+    email: "shipei.liu@rdc-west.com"
+    version: "v0.1.0"
+)
+
+@server(
+    group: login
+    prefix: /api/chip
+)
+
+service main-api {
+    @doc(
+        summary: "用户注册"
+    )
+    @handler RegisterHandler
+    post /user/register (RegisterReq)
+
+    @doc(
+        summary: "用户登录"
+    )
+
+    @handler LoginHandler
+    post /user/login (LoginReq) returns (LoginResp)
+}
+
+
+type RegisterReq struct {
+    Username string `json:"username" valid:"max=30,min=6"`
+    Password string `json:"password"`
+}
+
+
+type LoginReq struct {
+    Type string `json:"type,option=google|facebook|twitter|linkedin|discord"` // 登录类型 第一版之后google
+    AccessToken string `json:"access_token,optional"`
+}
+
+type LoginResp struct {
+    Token string `json:"token" example:""` //登录成功返回
+}

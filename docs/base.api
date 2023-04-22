@@ -1,0 +1,13 @@
+syntax = "v1"
+
+info(
+    title: "base api"
+    desc: "base api"
+    author: ""
+    email: ""
+    version: "v0.1.0"
+)
+
+//type AuthHeader struct {
+//    Authorization string `header:"authorization"`
+//}

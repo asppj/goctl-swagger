@@ -1,0 +1,46 @@
+syntax = "v1"
+
+info(
+    title: "api接口"
+    desc: "health 中的接口不对外开放，不会挂载到ALB"
+    author: "asppj"
+    email: "shipei.liu@rdc-west.com"
+    version: "0.1.0"
+)
+
+
+type HealthResp struct {
+    Success bool `json:"success"`
+}
+
+
+type VersionResp struct {
+    Version string `json:"version"`
+    Info string `json:"info"`
+}
+
+@server(
+    group: health
+)
+
+
+
+service main-api {
+    @doc(
+        summary: "ping -> pong"
+    )
+    @handler PingHandler
+    get /ping
+
+    @doc(
+        summary: "health check"
+    )
+    @handler HealthCheck
+    get /health returns (HealthResp)
+
+    @doc(
+        summary: "build version"
+    )
+    @handler Version
+    get /version returns (VersionResp)
+}

@@ -1,0 +1,33 @@
+syntax = "v1"
+
+info(
+    title: "upload file"
+    desc: "upload image backgroud"
+    author: "LiuShiPei"
+    email: "shipei.liu@rdc-west.com"
+    version: "v0.1.0"
+)
+
+@server(
+    group: upload
+    prefix: /api/chip
+)
+
+service main-api {
+    @doc(
+        summary: "上传图片。大小不超过1M"
+    )
+    @handler UploadImg
+    post /upload/img (UploadReq) returns (UploadResp)
+}
+
+
+type UploadReq struct {
+    File []byte `json:"file"`
+}
+
+
+type UploadResp struct {
+    SignURL string `json:"sign_url"`
+}
+
