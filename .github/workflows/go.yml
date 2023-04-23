@@ -1,0 +1,33 @@
+name: Build and Release
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.19'
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build binaries
+        run: |
+          GOOS=linux GOARCH=amd64 go build -o goctl-swaager-linux-amd64
+          GOOS=darwin GOARCH=amd64 go build -o goctl-swaager-darwin-amd64
+          GOOS=windows GOARCH=amd64 go build -o goctl-swaager-windows-amd64.exe
+          GOOS=linux GOARCH=arm64 go build -o goctl-swaager-linux-arm64
+          GOOS=darwin GOARCH=arm64 go build -o goctl-swaager-darwin-arm64
+          GOOS=windows GOARCH=arm64 go build -o goctl-swaager-windows-arm64.exe
+      - name: Install Goreleaser
+        uses: goreleaser/goreleaser-action@v2.8.0
+        with:
+          version: 'v0.178.1'
+      - name: Create release and upload binaries
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          goreleaser release --rm-dist
