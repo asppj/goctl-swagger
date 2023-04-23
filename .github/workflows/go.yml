@@ -28,6 +28,6 @@ jobs:
           version: 'v0.178.1'
       - name: Create release and upload binaries
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         run: |
           goreleaser release --rm-dist
