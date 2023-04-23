@@ -256,6 +256,28 @@ type swaggerSchemaObject struct {
 	Required         []string `json:"required,omitempty"`
 }
 
+func WrapCommonResponse(swaggerSchema swaggerSchemaObject) swaggerSchemaObject {
+	// var data *swaggerSchemaObject
+	data := &swaggerSchema
+	if swaggerSchema.Ref == "" && swaggerSchema.Properties == nil && swaggerSchema.Items == nil {
+		data = nil
+	}
+	return swaggerSchemaObject{
+		Title:       "CommonResponse",
+		Description: "公共返回结构 application/json",
+		Properties: &swaggerSchemaObjectProperties{
+			keyVal{Key: "code", Value: map[string]string{"type": "integer"}},
+			keyVal{Key: "msg", Value: map[string]string{"type": "string"}},
+			keyVal{Key: "hit", Value: map[string]string{"type": "string"}},
+			keyVal{Key: "data", Value: data},
+		},
+	}
+}
+
+type typeVal struct {
+	Type string `json:"type"`
+}
+
 // http://swagger.io/specification/#definitionsObject
 type swaggerDefinitionsObject map[string]swaggerSchemaObject
 

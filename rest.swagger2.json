@@ -1,0 +1,1169 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "type title here",
+    "description": "type desc here",
+    "version": "v0.1.0"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/chip/community/discussion": {
+      "get": {
+        "summary": "获取论坛帖子列表",
+        "operationId": "GetDiscussionList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DiscussionInfoResponse"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "by_topic_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "create_at",
+              "upvote_num"
+            ]
+          },
+          {
+            "name": "time",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "all",
+              "day",
+              "week",
+              "month",
+              "year"
+            ]
+          }
+        ],
+        "tags": [
+          "community"
+        ]
+      },
+      "post": {
+        "summary": "创建论坛帖子",
+        "operationId": "CreateDiscussion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateDiscussionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "community"
+        ]
+      }
+    },
+    "/api/chip/community/discussion/reply": {
+      "get": {
+        "summary": "获取帖子全部回复",
+        "operationId": "GetDiscussionReplyList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DiscussionReplyResponse"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "discussion_uuid",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "create_at",
+              "upvote_num"
+            ]
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "child_reply_num",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "reply_uuid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "community"
+        ]
+      },
+      "post": {
+        "summary": "创建帖子回复",
+        "operationId": "CreateDiscussionReplyList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiscussionReplyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "community"
+        ]
+      }
+    },
+    "/api/chip/community/topic": {
+      "get": {
+        "summary": "获取所有topic列表",
+        "operationId": "GetTopicList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CommunityTopicBriefInfo"
+              }
+            }
+          }
+        },
+        "tags": [
+          "community"
+        ]
+      },
+      "delete": {
+        "summary": "删除topic",
+        "operationId": "DeleteTopic",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommunityTopicUuidRequest"
+            }
+          }
+        ],
+        "tags": [
+          "community"
+        ]
+      },
+      "post": {
+        "summary": "创建topic",
+        "operationId": "CreateTopic",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateCommunityTopicRequest"
+            }
+          }
+        ],
+        "tags": [
+          "community"
+        ]
+      },
+      "put": {
+        "summary": "编辑topic",
+        "operationId": "EditTopic",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EditCommunityTopicRequest"
+            }
+          }
+        ],
+        "tags": [
+          "community"
+        ]
+      }
+    },
+    "/api/chip/community/topic/detail": {
+      "get": {
+        "summary": "获取topic详情",
+        "operationId": "GetTopicDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/CommunityTopicDetailReqsponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "community"
+        ]
+      }
+    },
+    "/api/chip/conversation": {
+      "post": {
+        "summary": "对话",
+        "operationId": "ConversationHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ConversationResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationReq"
+            }
+          }
+        ],
+        "tags": [
+          "conversation"
+        ]
+      }
+    },
+    "/api/chip/upload/img": {
+      "post": {
+        "summary": "上传图片。大小不超过1M",
+        "operationId": "UploadImg",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/UploadResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UploadReq"
+            }
+          }
+        ],
+        "tags": [
+          "upload"
+        ]
+      }
+    },
+    "/api/chip/upvote": {
+      "delete": {
+        "summary": "取消点赞",
+        "operationId": "CancelUpvote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/upvoteRequest"
+            }
+          }
+        ],
+        "tags": [
+          "upvote"
+        ]
+      },
+      "post": {
+        "summary": "点赞对象",
+        "operationId": "AddUpvote",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/upvoteRequest"
+            }
+          }
+        ],
+        "tags": [
+          "upvote"
+        ]
+      }
+    },
+    "/api/chip/user": {
+      "get": {
+        "summary": "插口用户继续信息",
+        "operationId": "GetUserInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/UserInfo"
+            }
+          }
+        },
+        "tags": [
+          "user"
+        ]
+      },
+      "put": {
+        "summary": "更新用户基础信息",
+        "operationId": "PutUserInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/UserInfo"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PutUserInfoReq"
+            }
+          }
+        ],
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/api/chip/user/login": {
+      "post": {
+        "summary": "用户登录",
+        "operationId": "LoginHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/LoginResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginReq"
+            }
+          }
+        ],
+        "tags": [
+          "login"
+        ]
+      }
+    },
+    "/api/chip/user/register": {
+      "post": {
+        "summary": "用户注册",
+        "operationId": "RegisterHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisterReq"
+            }
+          }
+        ],
+        "tags": [
+          "login"
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "health check",
+        "operationId": "HealthCheck",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/HealthResp"
+            }
+          }
+        },
+        "tags": [
+          "health"
+        ]
+      }
+    },
+    "/ping": {
+      "get": {
+        "summary": "ping -\u003e pong",
+        "operationId": "PingHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "tags": [
+          "health"
+        ]
+      }
+    },
+    "/version": {
+      "get": {
+        "summary": "build version",
+        "operationId": "Version",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/VersionResp"
+            }
+          }
+        },
+        "tags": [
+          "health"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CommonResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "hit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
+      },
+      "title": "CommonResponse",
+      "required": [
+        "code",
+        "hit",
+        "msg",
+        "data"
+      ]
+    },
+    "CommunityTopicBriefInfo": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "CommunityTopicBriefInfo",
+      "required": [
+        "uuid",
+        "name"
+      ]
+    },
+    "CommunityTopicDetailReqsponse": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "CommunityTopicDetailReqsponse",
+      "required": [
+        "uuid",
+        "name"
+      ]
+    },
+    "CommunityTopicUuidRequest": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        }
+      },
+      "title": "CommunityTopicUuidRequest",
+      "required": [
+        "uuid"
+      ]
+    },
+    "ConversationMessage": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "title": "ConversationMessage",
+      "required": [
+        "role",
+        "content"
+      ]
+    },
+    "ConversationReq": {
+      "type": "object",
+      "properties": {
+        "conversation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationMessage"
+          }
+        }
+      },
+      "title": "ConversationReq",
+      "required": [
+        "conversation"
+      ]
+    },
+    "ConversationResp": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "chat_id": {
+          "type": "string"
+        },
+        "is_finished": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "ConversationResp",
+      "required": [
+        "content",
+        "chat_id",
+        "is_finished"
+      ]
+    },
+    "CreateCommunityTopicRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "topics",
+            "roles"
+          ]
+        }
+      },
+      "title": "CreateCommunityTopicRequest",
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "CreateDiscussionRequest": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "topic_uuid": {
+          "type": "string"
+        }
+      },
+      "title": "CreateDiscussionRequest",
+      "required": [
+        "title",
+        "content",
+        "topic_uuid"
+      ]
+    },
+    "DiscussionInfoResponse": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "upvote_num": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "repliy_num": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "content": {
+          "type": "string"
+        },
+        "create_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "update_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "create_user": {
+          "$ref": "#/definitions/UserBriefInfo"
+        },
+        "topic": {
+          "$ref": "#/definitions/CommunityTopicBriefInfo"
+        }
+      },
+      "title": "DiscussionInfoResponse",
+      "required": [
+        "uuid",
+        "title",
+        "upvote_num",
+        "repliy_num",
+        "content",
+        "create_at",
+        "update_at",
+        "create_user",
+        "topic"
+      ]
+    },
+    "DiscussionReplyListRequest": {
+      "type": "object",
+      "properties": {
+        "discussion_uuid": {
+          "type": "string"
+        },
+        "order_by": {
+          "type": "string",
+          "enum": [
+            "create_at",
+            "upvote_num"
+          ]
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "child_reply_num": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "reply_uuid": {
+          "type": "string"
+        }
+      },
+      "title": "DiscussionReplyListRequest",
+      "required": [
+        "discussion_uuid",
+        "order_by",
+        "page",
+        "page_size"
+      ]
+    },
+    "DiscussionReplyRequest": {
+      "type": "object",
+      "properties": {
+        "discussion_uuid": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "to_replay_uuid": {
+          "type": "string"
+        }
+      },
+      "title": "DiscussionReplyRequest",
+      "required": [
+        "discussion_uuid",
+        "content"
+      ]
+    },
+    "DiscussionReplyResponse": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "discussion_uuid": {
+          "type": "string"
+        },
+        "to_user": {
+          "$ref": "#/definitions/UserBriefInfo"
+        },
+        "user": {
+          "$ref": "#/definitions/UserBriefInfo"
+        },
+        "content": {
+          "type": "string"
+        },
+        "to_replay_uuid": {
+          "type": "string"
+        },
+        "upvoteNum": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "reply_num": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "create_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "child_reply_list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Reply"
+          }
+        }
+      },
+      "title": "DiscussionReplyResponse",
+      "required": [
+        "child_reply_list"
+      ]
+    },
+    "DiscussionsListRequests": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "by_topic_id": {
+          "type": "string"
+        },
+        "sort_by": {
+          "type": "string",
+          "enum": [
+            "create_at",
+            "upvote_num"
+          ]
+        },
+        "time": {
+          "type": "string",
+          "enum": [
+            "all",
+            "day",
+            "week",
+            "month",
+            "year"
+          ]
+        }
+      },
+      "title": "DiscussionsListRequests",
+      "required": [
+        "page",
+        "page_size",
+        "sort_by",
+        "time"
+      ]
+    },
+    "EditCommunityTopicRequest": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "EditCommunityTopicRequest",
+      "required": [
+        "uuid",
+        "name"
+      ]
+    },
+    "HealthResp": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "HealthResp",
+      "required": [
+        "success"
+      ]
+    },
+    "LoginReq": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": " 登录类型 第一版之后google"
+        },
+        "access_token": {
+          "type": "string"
+        }
+      },
+      "title": "LoginReq",
+      "required": [
+        "type"
+      ]
+    },
+    "LoginResp": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "登录成功返回"
+        }
+      },
+      "title": "LoginResp",
+      "required": [
+        "token",
+        ""
+      ]
+    },
+    "PutUserInfoReq": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "img": {
+          "type": "string",
+          "enum": [
+            "you",
+            "me"
+          ]
+        }
+      },
+      "title": "PutUserInfoReq",
+      "required": [
+        "img"
+      ]
+    },
+    "RegisterReq": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "title": "RegisterReq",
+      "required": [
+        "username",
+        "max=30",
+        "password"
+      ]
+    },
+    "Reply": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "discussion_uuid": {
+          "type": "string"
+        },
+        "to_user": {
+          "$ref": "#/definitions/UserBriefInfo"
+        },
+        "user": {
+          "$ref": "#/definitions/UserBriefInfo"
+        },
+        "content": {
+          "type": "string"
+        },
+        "to_replay_uuid": {
+          "type": "string"
+        },
+        "upvoteNum": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "reply_num": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "create_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Reply",
+      "required": [
+        "uuid",
+        "discussion_uuid",
+        "to_user",
+        "user",
+        "content",
+        "to_replay_uuid",
+        "upvoteNum",
+        "reply_num",
+        "create_at"
+      ]
+    },
+    "UploadReq": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/byte"
+          }
+        }
+      },
+      "title": "UploadReq",
+      "required": [
+        "file"
+      ]
+    },
+    "UploadResp": {
+      "type": "object",
+      "properties": {
+        "sign_url": {
+          "type": "string"
+        }
+      },
+      "title": "UploadResp",
+      "required": [
+        "sign_url"
+      ]
+    },
+    "UserBriefInfo": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "avatar_url": {
+          "type": "string",
+          "enum": [
+            "you",
+            "me"
+          ]
+        }
+      },
+      "title": "UserBriefInfo",
+      "required": [
+        "uuid",
+        "name",
+        "avatar_url"
+      ]
+    },
+    "UserInfo": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "avatar_url": {
+          "type": "string",
+          "enum": [
+            "you",
+            "me"
+          ]
+        }
+      },
+      "title": "UserInfo",
+      "required": [
+        "uuid",
+        "name",
+        "avatar_url"
+      ]
+    },
+    "VersionResp": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "info": {
+          "type": "string"
+        }
+      },
+      "title": "VersionResp",
+      "required": [
+        "version",
+        "info"
+      ]
+    },
+    "upvoteRequest": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "target_uuid": {
+          "type": "string"
+        },
+        "target_type": {
+          "type": "string"
+        }
+      },
+      "title": "upvoteRequest",
+      "required": [
+        "uuid",
+        "target_uuid",
+        "target_type"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "description": "Enter JWT Bearer token **_only_**",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

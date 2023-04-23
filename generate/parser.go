@@ -288,9 +288,12 @@ func renderServiceRoutes(service spec.Service, groups []spec.Group, paths swagge
 				Responses: swaggerResponsesObject{
 					"200": swaggerResponseObject{
 						Description: desc,
-						Schema: swaggerSchemaObject{
+						// Schema: swaggerSchemaObject{
+						// 	schemaCore: respSchema,
+						// },
+						Schema: WrapCommonResponse(swaggerSchemaObject{
 							schemaCore: respSchema,
-						},
+						}),
 					},
 				},
 			}

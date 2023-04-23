@@ -24,10 +24,25 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DiscussionInfoResponse"
-              }
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DiscussionInfoResponse"
+                  }
+                }
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
             }
           }
         },
@@ -86,7 +101,22 @@
         "responses": {
           "200": {
             "description": "A successful response.",
-            "schema": {}
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": null
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
+            }
           }
         },
         "parameters": [
@@ -112,10 +142,25 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DiscussionReplyResponse"
-              }
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DiscussionReplyResponse"
+                  }
+                }
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
             }
           }
         },
@@ -174,7 +219,22 @@
         "responses": {
           "200": {
             "description": "A successful response.",
-            "schema": {}
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": null
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
+            }
           }
         },
         "parameters": [
@@ -200,10 +260,25 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CommunityTopicBriefInfo"
-              }
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CommunityTopicBriefInfo"
+                  }
+                }
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
             }
           }
         },
@@ -217,7 +292,22 @@
         "responses": {
           "200": {
             "description": "A successful response.",
-            "schema": {}
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": null
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
+            }
           }
         },
         "parameters": [
@@ -240,7 +330,22 @@
         "responses": {
           "200": {
             "description": "A successful response.",
-            "schema": {}
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": null
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
+            }
           }
         },
         "parameters": [
@@ -263,7 +368,22 @@
         "responses": {
           "200": {
             "description": "A successful response.",
-            "schema": {}
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": null
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
+            }
           }
         },
         "parameters": [
@@ -289,7 +409,22 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/CommunityTopicDetailReqsponse"
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": {
+                  "$ref": "#/definitions/CommunityTopicDetailReqsponse"
+                }
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
             }
           }
         },
@@ -314,7 +449,22 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/ConversationResp"
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": {
+                  "$ref": "#/definitions/ConversationResp"
+                }
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
             }
           }
         },
@@ -341,7 +491,22 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/UploadResp"
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": {
+                  "$ref": "#/definitions/UploadResp"
+                }
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
             }
           }
         },
@@ -367,7 +532,22 @@
         "responses": {
           "200": {
             "description": "A successful response.",
-            "schema": {}
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": null
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
+            }
           }
         },
         "parameters": [
@@ -390,7 +570,22 @@
         "responses": {
           "200": {
             "description": "A successful response.",
-            "schema": {}
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": null
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
+            }
           }
         },
         "parameters": [
@@ -416,7 +611,22 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/UserInfo"
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": {
+                  "$ref": "#/definitions/UserInfo"
+                }
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
             }
           }
         },
@@ -431,7 +641,22 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/UserInfo"
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": {
+                  "$ref": "#/definitions/UserInfo"
+                }
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
             }
           }
         },
@@ -458,7 +683,22 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/LoginResp"
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": {
+                  "$ref": "#/definitions/LoginResp"
+                }
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
             }
           }
         },
@@ -484,7 +724,22 @@
         "responses": {
           "200": {
             "description": "A successful response.",
-            "schema": {}
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": null
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
+            }
           }
         },
         "parameters": [
@@ -510,7 +765,22 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/HealthResp"
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": {
+                  "$ref": "#/definitions/HealthResp"
+                }
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
             }
           }
         },
@@ -526,7 +796,22 @@
         "responses": {
           "200": {
             "description": "A successful response.",
-            "schema": {}
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": null
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
+            }
           }
         },
         "tags": [
@@ -542,7 +827,22 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/VersionResp"
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "hit": {
+                  "type": "string"
+                },
+                "data": {
+                  "$ref": "#/definitions/VersionResp"
+                }
+              },
+              "description": "公共返回结构 application/json",
+              "title": "CommonResponse"
             }
           }
         },
@@ -553,6 +853,35 @@
     }
   },
   "definitions": {
+    "CommonResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "hit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
+      },
+      "title": "CommonResponse",
+      "required": [
+        "code",
+        "1000",
+        "hit",
+        "sjkldjf",
+        "msg",
+        "ok",
+        "data"
+      ]
+    },
     "CommunityTopicBriefInfo": {
       "type": "object",
       "properties": {

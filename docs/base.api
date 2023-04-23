@@ -11,3 +11,11 @@ info(
 //type AuthHeader struct {
 //    Authorization string `header:"authorization"`
 //}
+
+
+type CommonResponse struct{
+    Code int `json:"code" example:"1000"`
+    Hit int `json:"hit" example:"sjkldjf"`
+    Msg string `json:"msg" example:"ok"`
+    Data interface{} `json:"data"`
+}
